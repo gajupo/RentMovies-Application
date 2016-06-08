@@ -5,58 +5,54 @@ using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
+using System.Data.Entity;
 
 namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public MoviesController()
+        {
+            _context= new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
         // GET: Movies/Random
-        public ActionResult Random()
-        {
-            var movie = new Movie() { Name = "Shrek" };
-            //ViewData["Movie"] = movie;
-            //ViewBag.Movie = movie;
+        //public ActionResult Random()
+        //{
+        //    var movie = new Movie() { Name = "Shrek" };
+        //    //ViewData["Movie"] = movie;
+        //    //ViewBag.Movie = movie;
 
-            var customers = new List<Customer> 
-            {
-                new Customer {Name = "customer 1"},
-                new Customer {Name = "Customer 2"}
-            };
+        //    var customers = new List<Customer> 
+        //    {
+        //        new Customer {Name = "customer 1"},
+        //        new Customer {Name = "Customer 2"}
+        //    };
 
 
-            var viewModel = new RandomMovieViewModel
-            {
-                Movie = movie,
-                Customers = customers
-            };
+        //    var viewModel = new RandomMovieViewModel
+        //    {
+        //        Movie = movie,
+        //        Customers = customers
+        //    };
 
-            return View(viewModel);
+        //    return View(viewModel);
 
-            //return Content("Hello world");
-            //return HttpNotFound();
-            //return new EmptyResult();
-            //return RedirectToAction("Index", "Home", new { page=1, sortBy="Name"});
-        }
-        public ActionResult Edit(int id)
-        {
-            return Content("id=" + id);
-        }
+        //    //return Content("Hello world");
+        //    //return HttpNotFound();
+        //    //return new EmptyResult();
+        //    //return RedirectToAction("Index", "Home", new { page=1, sortBy="Name"});
+        //}
         //movies
         public ActionResult Index()
         {
-            var movies = new List<Movie>
-            {
-                new Movie
-                {
-                    Id = 1,
-                    Name = "Avengers 2"
-                },
-                new Movie
-                {
-                    Id = 2,
-                    Name = "In Time"
-                }
-            };
+            var movies = _context.Movies.Include(c => c.Genre).ToList();
 
             return View("List", movies);
 
@@ -64,23 +60,13 @@ namespace Vidly.Controllers
 
         public ActionResult Details(int id)
         {
-            var movies = new List<Movie>
-            {
-                new Movie
-                {
-                    Id = 1,
-                    Name = "Avengers 2"
-                },
-                new Movie
-                {
-                    Id = 2,
-                    Name = "In Time"
-                }
-            };
 
-            var movie = movies.SingleOrDefault(m => m.Id == id);
+            var movie = _context.Movies.Include(c => c.Genre).SingleOrDefault(c => c.Id == id);
 
-            return View(movie);
+            if (movie == null)
+                return HttpNotFound();
+
+           return View(movie);
         }
 
         //public ActionResult Index(int? pageIndex, string sortBy)
