@@ -22,6 +22,16 @@ namespace Vidly.Controllers
         {
             _context.Dispose();
         }
+        public ActionResult New()
+        {
+            var genres = _context.Genres.ToList();
+            var viewmodel = new MoviesFormViewModel()
+            {
+                Genres = genres
+            };
+
+            return View("MovieForm", viewmodel);
+        }
         // GET: Movies/Random
         //public ActionResult Random()
         //{
