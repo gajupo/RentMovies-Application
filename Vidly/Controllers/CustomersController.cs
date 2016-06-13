@@ -27,14 +27,32 @@ namespace Vidly.Controllers
             var membershiptypes = _context.MembershipTypes.ToList();
             var viewmodel = new CustomerFormViewModel
             {
+                /*with thi initialize a customer object to avoid the message error for id hidden field, 
+                 because Customer.Id is integer, it will be converted to 0 and put into the html hidden field*/
+                Customer = new Customer(),
                 MembershipTypes = membershiptypes
             };
 
             return View("CustomerForm",viewmodel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
+            //valid the model state against the anotations in the model
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CustomerFormViewModel()
+                {
+                    //return to the view the user input data
+                    Customer =customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+
+                };
+                //pass the view name and the viewModel to the view
+                return View("CustomerForm",viewModel);
+            }
+
             if (customer.Id == 0)
             {
                 _context.Customers.Add(customer);
