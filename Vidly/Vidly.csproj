@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Dtos\CustomerDto.cs" />
+    <Compile Include="Dtos\GenreDto.cs" />
     <Compile Include="Dtos\MembershiptypeDto.cs" />
     <Compile Include="Dtos\MovieDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -232,6 +233,10 @@
     <Compile Include="Migrations\201606100357195_AddGenreAndMembershipType.cs" />
     <Compile Include="Migrations\201606100357195_AddGenreAndMembershipType.Designer.cs">
       <DependentUpon>201606100357195_AddGenreAndMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606201806593_SeedUsers.cs" />
+    <Compile Include="Migrations\201606201806593_SeedUsers.Designer.cs">
+      <DependentUpon>201606201806593_SeedUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -534,6 +539,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606100357195_AddGenreAndMembershipType.resx">
       <DependentUpon>201606100357195_AddGenreAndMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606201806593_SeedUsers.resx">
+      <DependentUpon>201606201806593_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
