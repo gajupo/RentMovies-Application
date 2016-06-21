@@ -9,6 +9,8 @@ namespace Vidly
         {
             filters.Add(new HandleErrorAttribute());
             filters.Add(new AuthorizeAttribute());
+            //forbidden access to http only https
+            filters.Add(new RequireHttpsAttribute());
         }
     }
 }
