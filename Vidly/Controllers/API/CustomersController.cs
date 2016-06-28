@@ -20,7 +20,12 @@ namespace Vidly.Controllers.API
            _context = new ApplicationDbContext();
         }
         //GET /API/customers
-        public IEnumerable<CustomerDto> GetCustomers()
+        /// <summary>
+        /// Returns all customer that marches with query param
+        /// </summary>
+        /// <param name="query">This the customer name sended by the front-end</param>
+        /// <returns></returns>
+        public IHttpActionResult GetCustomers(string query = null)
         {
 
             //eagger loading to return hierarchical data (MembershipType)
@@ -40,10 +45,18 @@ namespace Vidly.Controllers.API
                     }
                 ]
              */
-            return _context.Customers
-                .Include(c => c.MembershipType)
+            //get customers and memberships using egger loading
+            var customersQuery = _context.Customers.Include(c => c.MembershipType);
+
+            //modify the query to filter by query parameter
+            if (!string.IsNullOrWhiteSpace(query))
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+            //map the object and convert toList
+            var customerDtos = customersQuery
                 .ToList()
                 .Select(Mapper.Map<Customer,CustomerDto>);
+
+            return Ok(customerDtos);
         }
         //GET /API/customer/1
         public IHttpActionResult GetCustomer(int id)

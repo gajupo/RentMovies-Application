@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
 using System.Data.Entity;
+using System.Runtime.Caching;
 
 namespace Vidly.Controllers
 {
@@ -99,11 +100,21 @@ namespace Vidly.Controllers
         [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
+            //example of caching data, assuming the genres list will not change in the future
+            //and use it after only if you have done performance profiler, finally use this approach for
+            //displaying information not for updating
+            //if (MemoryCache.Default["Genres"]==null)
+            //{
+            //    MemoryCache.Default["Genre"] = _context.Genres.ToList();
+            //}
+
+            //var genres = MemoryCache.Default["Genres"] as IEnumerable<Genre>;
+
             if (!ModelState.IsValid)
             {
                 var viewModel = new MoviesFormViewModel(movie)
                 {
-                    Genres = _context.Genres.ToList()
+                    Genres = _context.Genres.ToList() //genres
                 };
 
                 return View("MovieForm", viewModel);

@@ -27,9 +27,15 @@ textarea {
     font-weight: bold;
     font-size: 30px;
 }
-.field-validation-error {
+/*
+    Apply style to label.error, this is applied when jqueryval fails
+*/
+.field-validation-error,
+label.error {
     color: red;
 }
-.input-validation-error {
+/*input field with error wil have a red border*/
+.input-validation-error,
+input.error {
     border: 2px solid red;
 }
