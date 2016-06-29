@@ -435,7 +435,9 @@
     <None Include="Properties\PublishProfiles\GoDaddyProfile.pubxml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\PublishProfiles\Testing.pubxml" />
+    <None Include="Properties\PublishProfiles\Testing.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
