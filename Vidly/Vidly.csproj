@@ -251,10 +251,6 @@
     <Compile Include="Migrations\201606082249097_AddBirthDateToCustomers.Designer.cs">
       <DependentUpon>201606082249097_AddBirthDateToCustomers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606082331576_PopulateGenres.cs" />
-    <Compile Include="Migrations\201606082331576_PopulateGenres.Designer.cs">
-      <DependentUpon>201606082331576_PopulateGenres.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201606100357195_AddGenreAndMembershipType.cs" />
     <Compile Include="Migrations\201606100357195_AddGenreAndMembershipType.Designer.cs">
       <DependentUpon>201606100357195_AddGenreAndMembershipType.cs</DependentUpon>
@@ -282,6 +278,10 @@
     <Compile Include="Migrations\201606230045166_AddNumberAvailableToMovies.cs" />
     <Compile Include="Migrations\201606230045166_AddNumberAvailableToMovies.Designer.cs">
       <DependentUpon>201606230045166_AddNumberAvailableToMovies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606282352046_PopulateGenres.cs" />
+    <Compile Include="Migrations\201606282352046_PopulateGenres.Designer.cs">
+      <DependentUpon>201606282352046_PopulateGenres.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -430,6 +430,12 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="appSettings.config" />
+    <Content Include="ConnectionStrings.config" />
+    <None Include="Properties\PublishProfiles\GoDaddyProfile.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\Testing.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -559,6 +565,10 @@
     <Content Include="Views\Movies\MovieForm.cshtml" />
     <Content Include="Views\Movies\ReadOnlyList.cshtml" />
     <Content Include="Views\Rentals\New.cshtml" />
+    <None Include="Web.Testing.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -598,9 +608,6 @@
     <EmbeddedResource Include="Migrations\201606082249097_AddBirthDateToCustomers.resx">
       <DependentUpon>201606082249097_AddBirthDateToCustomers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606082331576_PopulateGenres.resx">
-      <DependentUpon>201606082331576_PopulateGenres.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606100357195_AddGenreAndMembershipType.resx">
       <DependentUpon>201606100357195_AddGenreAndMembershipType.cs</DependentUpon>
     </EmbeddedResource>
@@ -622,10 +629,22 @@
     <EmbeddedResource Include="Migrations\201606230045166_AddNumberAvailableToMovies.resx">
       <DependentUpon>201606230045166_AddNumberAvailableToMovies.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606282352046_PopulateGenres.resx">
+      <DependentUpon>201606282352046_PopulateGenres.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Testing|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
